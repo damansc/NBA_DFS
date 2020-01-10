@@ -11,7 +11,7 @@ def get_boxscore_links(year='2020'):
     It seems that bball reference lags behind a bit.
     I ran today (1/6/20) and only through 1/4/20 is up.
     """
-    
+
     months = ['october', 'november', 'december', 'january', 'february', 'march', 'april']
     root = 'https://www.basketball-reference.com'
     boxscore_links = []
@@ -28,5 +28,22 @@ def get_boxscore_links(year='2020'):
         for x in a_tags:
             boxscore_links.append(root + x)
 
-    return print(boxscore_links)
+    return boxscore_links
+
+test = get_boxscore_links()
+source = requests.get(test[1])
+page = BeautifulSoup(source.content, 'html.parser')
+
+# getting each table, thead, and tbody
+tables = page.findAll('table')
+theads = page.findAll('thead')
+tbodys = page.findAll('tbody')
+
+# getting each table head
+table_body = page.find('tbody')
+data_rows = []
+for tr in table_body.findAll('td'):
+    key = tr.get_text()
+    data_rows.append(key)
+
 

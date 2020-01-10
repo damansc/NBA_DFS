@@ -1,8 +1,8 @@
 import pandas as pd
 from bs4 import BeautifulSoup
 import requests
-import pickle
 import numpy as np
+
 
 def player_per_game_std(year='2020'):
     """
@@ -35,7 +35,7 @@ def player_per_game_std(year='2020'):
     #  chunking table data, making dataframe, saving to csv.
     row_chunks = [data_rows[x:x+29] for x in np.arange(0, len(data_rows), 29)]
     data = pd.DataFrame(row_chunks, columns=headers)
-    data.to_csv('player_per_game_std_{}.csv'.format(str(year)))
+    data.to_csv('scraped_data\player_per_game_std_{}.csv'.format(str(year)))
     return data
 
 
@@ -71,10 +71,10 @@ def player_per_game_adv(year='2020'):
     row_chunks = [data_rows[x:x+28] for x in np.arange(0, len(data_rows), 28)]
     data = pd.DataFrame(row_chunks, columns=headers)
     data.drop('\xa0', axis=1)
-    data.to_csv('player_per_game_adv_{}.csv'.format(str(year)))
+    data.to_csv('scraped_data\player_per_game_adv_{}.csv'.format(str(year)))
     return data
 
 # calling functions to save to csv, 
-# set to variable for saving df.
+# set to variable for reviewing data in console.
 player_per_game_adv()
 player_per_game_std()
