@@ -49,7 +49,7 @@ def avg_dfs_score():
     # writing data
     df.to_csv(r'computed_data\avg_dfs_score_exclude_dubs.csv')
 
-    return(df)
+    return df
 
 # calling function to apply computations 
 # and write to csv for storage.
